@@ -1,0 +1,193 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');*/
+
+/*:root {*/
+/*    --gray-dark: #7A8593;*/
+/*    --gray-light: #f6f6f6;*/
+/*    --gray-lighter: #d2d2d2;*/
+/*    --white: #ffffff;*/
+/*    --teal: #6ab0af;*/
+/*    --primary: #337ab7;*/
+/*    --primary-border: #2e6da4;*/
+/*    --delete-btn: 15px;*/
+/*}*/
+
+/** {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    box-sizing: border-box;*/
+/*    font-family: 'Poppins', sans-serif;*/
+/*}*/
+
+/*body {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    min-height: 100vh;*/
+/*    padding: 10px;*/
+/*    background: var(--gray-lighter);*/
+/*}*/
+
+/*.panel-table .panel-body {*/
+/*    padding: 0;*/
+/*}*/
+
+/*.panel-table .panel-body .table-bordered {*/
+/*    border-style: none;*/
+/*    margin: 0;*/
+/*}*/
+
+/*.panel-table .panel-body .table-bordered > thead > tr > th:first-of-type {*/
+/*    text-align: center;*/
+/*}*/
+
+/*.panel-table .panel-body .table-bordered > thead > tr > th:last-of-type,*/
+/*.panel-table .panel-body .table-bordered > tbody > tr > td:last-of-type {*/
+/*    text-align: center;*/
+/*    border-right: 0;*/
+/*}*/
+
+/*.panel-table .panel-body .table-bordered > thead > tr > th:first-of-type,*/
+/*.panel-table .panel-body .table-bordered > tbody > tr > td:first-of-type {*/
+/*    text-align: center;*/
+/*    border-left: 0;*/
+/*}*/
+
+/*.panel-table .panel-body .table-bordered > tbody > tr:first-of-type > td {*/
+/*    text-align: center;*/
+/*    border-bottom: 0;*/
+/*}*/
+
+/*.panel-table .panel-body .table-bordered > thead > tr:first-of-type > th {*/
+/*    text-align: center;*/
+/*    border-top: 0;*/
+/*}*/
+
+/*.panel-table .panel-footer .pagination {*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    display: flex;*/
+/*    margin: 0;*/
+/*}*/
+
+/*.panel-table .panel-footer .col {*/
+/*    line-height: 34px;*/
+/*    height: 34px;*/
+/*}*/
+
+/*.panel-table .panel-heading .col h3 {*/
+/*    line-height: 30px;*/
+/*    height: 30px;*/
+/*}*/
+
+/*.panel-table .panel-body .table-bordered > tbody > tr > td {*/
+/*    text-align: center;*/
+/*    line-height: 34px;*/
+/*}*/
+
+/*button {*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.product-form {*/
+/*    border: 1px solid var(--gray-lighter);*/
+/*    padding: 2rem;*/
+/*}*/
+
+/*.product-form label {*/
+/*    display: block;*/
+/*    padding-bottom: 0.3rem;*/
+/*}*/
+
+/*.product-form__input,*/
+/*.product-form__btn {*/
+/*    font-size: 1.5rem;*/
+/*    line-height: 2;*/
+/*    padding: 0.2rem 0.6rem;*/
+/*}*/
+
+/*.product-form__input {*/
+/*    width: 15vw;*/
+/*    margin-bottom: 1.6rem;*/
+/*}*/
+
+/*.product-form__btn {*/
+/*    background: var(--teal);*/
+/*    border: 0;*/
+/*    color: var(--white);*/
+/*    transition: background 0.6s ease-in-out;*/
+/*}*/
+
+/*.product-form__btn:hover {*/
+/*    background: #4d8483;*/
+/*}*/
+
+/*.modal-content {*/
+/*    left: 80vw;*/
+/*    width: 20vw;*/
+/*}*/
+
+/*.pagination ul {*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    margin: 0 auto;*/
+/*    max-width: 800px;*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    background: var(--white);*/
+/*    padding: 8px;*/
+/*    border-radius: 50px;*/
+/*    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*.pagination ul li {*/
+/*    color: var(--primary-border);*/
+/*    list-style: none;*/
+/*    line-height: 45px;*/
+/*    text-align: center;*/
+/*    font-size: 18px;*/
+/*    font-weight: 500;*/
+/*    cursor: pointer;*/
+/*    user-select: none;*/
+/*    transition: all 0.3s ease;*/
+/*}*/
+
+/*.pagination ul li.numb {*/
+/*    list-style: none;*/
+/*    height: 45px;*/
+/*    width: 45px;*/
+/*    margin: 0 3px;*/
+/*    line-height: 45px;*/
+/*    border-radius: 50%;*/
+/*}*/
+
+/*.pagination ul li.numb.first {*/
+/*    margin: 0 3px 0 -5px;*/
+/*}*/
+
+/*.pagination ul li.numb.last {*/
+/*    margin: 0 -5px 0 3px;*/
+/*}*/
+
+/*.pagination ul li.dots {*/
+/*    font-size: 22px;*/
+/*    cursor: default;*/
+/*}*/
+
+/*.pagination ul li.btn {*/
+/*    padding: 0 20px;*/
+/*    border-radius: 50px;*/
+/*}*/
+
+/*.pagination li.active,*/
+/*.pagination ul li.numb:hover,*/
+/*.pagination ul li:first-child:hover,*/
+/*.pagination ul li:last-child:hover {*/
+/*    color: #fff;*/
+/*    background: var(--primary);*/
+/*}*/
+
+/*td input[type="text"] {*/
+/*    border: none;*/
+/*    width: 100%;*/
+/*    box-sizing: border-box;*/
+/*}*/

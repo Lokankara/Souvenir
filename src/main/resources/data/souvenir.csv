@@ -1,40 +1,9 @@
-BRAND,COUNTRY,ISSUE,NAME,PRICE
-Rolex,Switzerland,2023-07-22T14:15,Luxury Watch,5000.00
-Nike,USA,2023-07-22T15:45,Sports Shoes,150.00
-Samsung,South Korea,2023-07-22T16:30,Smartphone,800.00
-BMW,France,2023-07-08T19:11,Car,1000.0
-Lamborghini,UA,2023-07-14T19:13,Super car,1000.0
-Ferrari,Italy,2023-07-29T17:06,488 GTB,262.0
-Lamborghini,Italy,2023-07-29T17:07,Aventador,393.0
-Bugatti,France,2023-07-29T17:06,Chiron,299.0
-Koenigsegg,Sweden,2023-07-29T17:07,Jesko,300.0
-Shipbuilding,Ukraine,2023-07-20T15:45,Custom T-shirt,25.49
-Privatbank,Ukraine,2023-07-19T08:15,Engraved Pen,7.99
-Rolex,Switzerland,2023-07-22T14:15,Luxury Watch,5000.00
-Nike,USA,2023-07-22T15:45,Sports Shoes,150.00
-Samsung,South Korea,2023-07-22T16:30,Smartphone,800.00
-BMW,France,2023-07-08T19:11,Car,1000.0
-Lamborghini,UA,2023-07-14T19:13,Super car,1000.0
-Ferrari,Italy,2023-07-29T17:06,488 GTB,262.0
-Lamborghini,Italy,2023-07-29T17:07,Aventador,393.0
-Bugatti,France,2023-07-29T17:06,Chiron,299.0
-Koenigsegg,Sweden,2023-07-29T17:07,Jesko,300.0
-Shipbuilding,Ukraine,2023-07-20T15:45,Custom T-shirt,25.49
-Privatbank,Ukraine,2023-07-19T08:15,Engraved Pen,7.99
-Rolex,Switzerland,2023-07-22T14:15,Luxury Watch,5000.00
-Nike,USA,2023-07-22T15:45,Sports Shoes,150.00
-Samsung,South Korea,2023-07-22T16:30,Smartphone,800.00
-BMW,France,2023-07-08T19:11,Car,1000.0
-Lamborghini,UA,2023-07-14T19:13,Super car,1000.0
-Ferrari,Italy,2023-07-29T17:06,488 GTB,262.0
-Lamborghini,Italy,2023-07-29T17:07,Aventador,393.0
-Bugatti,France,2023-07-29T17:06,Chiron,299.0
-Koenigsegg,Sweden,2023-07-29T17:07,Jesko,300.0
-Shipbuilding,Ukraine,2023-07-20T15:45,Custom T-shirt,25.49
-Privatbank,Ukraine,2023-07-19T08:15,Engraved Pen,7.99
-Rolex,Switzerland,2023-07-22T14:15,Luxury Watch,5000.00
-Nike,USA,2023-07-22T15:45,Sports Shoes,150.00
-Samsung,South Korea,2023-07-22T16:30,Smartphone,800.00
+brand,country,issue,name,price
+Lamborghini,France,2023-07-21T22:26,apple,500.0
+BMW,France,2023-07-27T22:27,ada,100.0
+Rolex,Switzerland,2023-07-22T14:15,Luxury Watch,5000.0
+Nike,USA,2023-07-22T15:45,Sports Shoes,150.0
+Samsung,South Korea,2023-07-22T16:30,Smartphone,800.0
 BMW,France,2023-07-08T19:11,Car,1000.0
 Lamborghini,UA,2023-07-14T19:13,Super car,1000.0
 Ferrari,Italy,2023-07-29T17:06,488 GTB,262.0
