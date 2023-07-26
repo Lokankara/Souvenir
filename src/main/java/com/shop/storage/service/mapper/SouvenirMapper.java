@@ -13,6 +13,14 @@ import java.util.List;
 @AllArgsConstructor
 public class SouvenirMapper {
 
+    public PostSouvenirDto toDto(
+            Souvenir souvenir,
+            Brand brand) {
+        PostSouvenirDto dto = toDto(souvenir);
+        dto.setBrand(toDto(brand));
+        return dto;
+    }
+
     public PostBrandDto toDto(Brand entity) {
         return PostBrandDto.builder()
                            .name(entity.getName())

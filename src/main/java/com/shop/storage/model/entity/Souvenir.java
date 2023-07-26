@@ -1,19 +1,18 @@
 package com.shop.storage.model.entity;
 
+import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvCustomBindByName;
 import com.opencsv.bean.CsvDate;
 import com.opencsv.bean.CsvRecurse;
+import com.shop.storage.service.mapper.BrandConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectOutput;
-import java.io.Serial;
+import java.io.*;
 import java.time.LocalDateTime;
 
 @Data
@@ -40,10 +39,12 @@ public class Souvenir
     @Override
     public void writeExternal(ObjectOutput out)
             throws IOException {
+
     }
 
     @Override
     public void readExternal(ObjectInput in)
             throws IOException, ClassNotFoundException {
+
     }
 }

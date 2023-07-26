@@ -35,6 +35,7 @@
     </div>
 </div>
 
+
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -42,7 +43,7 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col col-xs-6">
-                            <h2 style="font-size: 25px;" class="panel-title">Souvenir</h2>
+                            <h2 class="panel-title">Souvenir</h2>
                         </div>
                         <div class="col col-xs-6 text-right">
                             <a href="#" onclick="showModal()">
@@ -68,18 +69,19 @@
                         </thead>
                         <tbody>
                         <tr th:each="souvenir : ${souvenirs}">
-                            <form th:action="@{/update/{name} (name=${souvenir.name})}" th:method="patch">
-                            <td><input type="text" name="name" th:value="${souvenir.name}"></td>
-                            <td><input type="text" name="price" th:value="${souvenir.price}"></td>
-                            <td><input type="text" name="issue" th:value="${souvenir.issue}"></td>
-                            <td><input type="text" name="brand" th:value="${souvenir.brand.name}"></td>
-                            <td><input type="text" name="country" th:value="${souvenir.brand.country}"></td>
-                            <td style="display: inline-flex;">
+                            <td th:text="${souvenir.name}"></td>
+                            <td th:text="${souvenir.price}"></td>
+                            <td th:text="${souvenir.issue}"></td>
+                            <td th:text="${souvenir.brand.name}"></td>
+                            <td th:text="${souvenir.brand.country}"></td>
+                            <td>
+                                <form th:action="@{/update/{name} (name=${souvenir.name})}" th:method="patch"
+                                      style="display: inline-block;">
                                     <input type="hidden" name="_method" value="delete"/>
                                     <button type="submit" class="btn btn-success">
                                         <em class="fa fa-pencil"></em>
                                     </button>
-                            </form>
+                                </form>
                                 <form th:action="@{/delete/{name} (name=${souvenir.name})}" th:method="delete"
                                       style="display: inline-block;">
                                     <input type="hidden" name="_method" value="delete"/>
@@ -94,7 +96,7 @@
                 </div>
                 <div class="panel-footer">
                     <div class="row">
-                        <div class="pagination" onclick="handlePaginationClick(event)">
+                        <div class="pagination">
                             <ul></ul>
                         </div>
                     </div>
@@ -103,12 +105,10 @@
         </div>
     </div>
 </div>
-
 <script th:inline="javascript">
     const totalPages = [[${pageNumbers}]];
-    let currentPage = [[${currentPage}]];
+    const page = [[${currentPage}]];
 </script>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="/script.js"></script>

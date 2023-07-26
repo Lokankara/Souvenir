@@ -1,8 +1,10 @@
 package com.shop.storage.service;
 
+import com.shop.storage.dao.io.SouvenirFileStorage;
 import com.shop.storage.model.dto.PostSouvenirDto;
+import com.shop.storage.model.entity.Brand;
 import com.shop.storage.model.entity.Souvenir;
-import com.shop.storage.service.facade.StorageFacade;
+import com.shop.storage.service.exception.SouvenirNotFoundException;
 import com.shop.storage.service.mapper.SouvenirMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,56 +15,49 @@ import java.util.List;
 @RequiredArgsConstructor
 public class IOSouvenirService
         implements SouvenirService<PostSouvenirDto> {
-    private final StorageFacade facade;
     private final SouvenirMapper mapper;
+    private final SouvenirFileStorage storage;
 
     @Override
-    public PostSouvenirDto save(
-            final PostSouvenirDto dto) {
-        Souvenir souvenir = facade.saveSouvenir(
-                mapper.toEntity(dto));
-        return mapper.toDto(souvenir);
+    public PostSouvenirDto save(PostSouvenirDto dto) {
+        Souvenir souvenir = storage.saveToCsv(
+                mapper.toEntity(dto)).orElseThrow(() ->
+                new SouvenirNotFoundException("Souvenir Not Found"));
+        Brand brand = storage.save(
+                mapper.toEntity(dto.getBrand())).orElseThrow(() ->
+                new SouvenirNotFoundException("Souvenir Not Found"));
+        return mapper.toDto(souvenir, brand);
     }
 
     @Override
-    public PostSouvenirDto edit(
-            final PostSouvenirDto dto) {
-        Souvenir souvenir = facade.editSouvenir(
-                mapper.toEntity(dto));
-        return mapper.toDto(souvenir);
+    public PostSouvenirDto edit(PostSouvenirDto postSouvenirDto) {
+        return null;
     }
 
     @Override
     public List<PostSouvenirDto> findAll() {
-        return mapper.toListDto(
-                facade.findAllSouvenirs());
+        return mapper.toListDto(storage.readFromCsv());
     }
 
     @Override
-    public List<PostSouvenirDto> findAllByBrand(
-            final String name) {
-        return mapper.toListDto(
-                facade.findAllSouvenirsByBrand(name));
+    public List<PostSouvenirDto> findAllByBrand(String name) {
+        return null;
     }
 
     @Override
-    public List<PostSouvenirDto> findAllByYear(
-            final String year) {
-        return mapper.toListDto(
-                facade.findAllSouvenirsByYear(year));
+    public List<PostSouvenirDto> findAllByYear(String year) {
+        return null;
     }
 
     @Override
-    public List<PostSouvenirDto> findAllByCountry(
-            final String country) {
-        return mapper.toListDto(
-                facade.findAllSouvenirsByCountry(country));
+    public List<PostSouvenirDto> findAllByCountry(String country) {
+        return null;
     }
 
     @Override
-    public PostSouvenirDto delete(
-            final String name) {
+    public PostSouvenirDto delete(String name) {
         return mapper.toDto(
-                facade.delete(name));
+                storage.delete(name).orElseThrow(() ->
+                        new SouvenirNotFoundException("Souvenir Not Found")));
     }
 }

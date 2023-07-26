@@ -1,24 +1,18 @@
 package com.shop.storage.service;
 
+import com.shop.storage.model.entity.Brand;
+
 import java.util.List;
 
-public interface BrandService<T> {
+public interface BrandService {
 
-    List<T> findAllByLessPrice(double price);
+    void findBrandByPrice(double price);
 
-    List<T> findAllBrandWithSouvenirs();
+    List<Brand> findAllBrandWithSouvenirs();
 
-    List<T> findBrandsByYear(
+    List<Brand> findBrandsByYear(
             String souvenirName,
             String year);
 
-    T save(T t);
-
-    T edit(T t);
-
-    List<T> findAll();
-
-    List<T> findAllByCountry(String country);
-
-    T delete(String name);
+    Brand deleteBrand(String manufacturerName);
 }

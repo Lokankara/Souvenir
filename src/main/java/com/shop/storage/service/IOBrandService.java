@@ -1,21 +1,16 @@
 package com.shop.storage.service;
 
-import com.shop.storage.dao.storage.BrandFileStorage;
 import com.shop.storage.model.entity.Brand;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
-public class IOBrandService implements BrandService<Brand> {
-
-    private final BrandFileStorage brandStorage;
-
+public class IOBrandService
+        implements BrandService {
     @Override
-    public List<Brand> findAllByLessPrice(double price) {
-        return null;
+    public void findBrandByPrice(double price) {
+
     }
 
     @Override
@@ -31,27 +26,15 @@ public class IOBrandService implements BrandService<Brand> {
     }
 
     @Override
-    public List<Brand> findAll() {
+    public Brand deleteBrand(String manufacturerName) {
         return null;
     }
 
-    @Override
-    public List<Brand> findAllByCountry(String country) {
-        return null;
+    public Brand getBrandById(Long id) {
+        return new Brand();
     }
 
-    @Override
-    public Brand save(Brand brand) {
-        return null;
-    }
-
-    @Override
-    public Brand edit(Brand brand) {
-        return null;
-    }
-
-    @Override
-    public Brand delete(String name) {
-        return null;
+    public Brand getBrandName(String brand) {
+        return Brand.builder().name(brand).build();
     }
 }

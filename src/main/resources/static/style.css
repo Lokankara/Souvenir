@@ -107,7 +107,7 @@ button {
 
 .product-form__input {
     width: 10vw;
-    /*border: 1px solid var(--gray-dark);*/
+    border: 1px solid var(--gray-dark);
     margin-bottom: 1.6rem;
 }
 
@@ -187,8 +187,6 @@ button {
     background: var(--primary);
 }
 
-td input[type="text"] {
-    border: none;
-    width: 100%;
-    box-sizing: border-box;
+input {
+
 }
