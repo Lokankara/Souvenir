@@ -1,12 +1,13 @@
 package com.storage.service;
 
-import com.storage.model.dto.*;
+import com.storage.model.dto.PostSouvenirDto;
 import com.storage.model.entity.Souvenir;
 import com.storage.service.facade.StorageFacade;
 import com.storage.service.mapper.SouvenirMapper;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+
 @RequiredArgsConstructor
 public class IOSouvenirService
         implements SouvenirService<PostSouvenirDto> {
@@ -62,9 +63,7 @@ public class IOSouvenirService
     }
 
     @Override
-    public PostSouvenirDto delete(
-            final String name) {
-        return mapper.toDto(
-                facade.delete(name));
+    public void delete(final String name) {
+        facade.delete(name);
     }
 }

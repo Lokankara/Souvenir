@@ -1,7 +1,7 @@
 package com.storage.service;
 
-import com.storage.dao.storage.BrandFileStorage;
-import com.storage.dao.storage.SouvenirFileStorage;
+import com.storage.dao.BrandFileStorage;
+import com.storage.dao.SouvenirFileStorage;
 import com.storage.model.dto.PostBrandDto;
 import com.storage.model.dto.PostSouvenirDto;
 import com.storage.model.entity.Brand;
@@ -40,10 +40,6 @@ class IOSouvenirServiceTest {
 
     @Test
     void findAllByCountry() {
-    }
-
-    @Test
-    void delete() {
     }
 
     private IOSouvenirService service;

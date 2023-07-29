@@ -14,9 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class PostSouvenirDto extends Dto {
-
-    private Long id;
+public class PostSouvenirDto implements Dto {
     @NonNull
     private String name;
     @NonNull

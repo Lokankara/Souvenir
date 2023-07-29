@@ -1,4 +1,4 @@
 package com.storage.model.dto;
 
-public abstract class Dto {
+public interface Dto {
 }

@@ -1,55 +1,63 @@
 package com.storage.service;
 
-import com.storage.dao.storage.BrandFileStorage;
+import com.storage.dao.BrandFileStorage;
+import com.storage.model.dto.PostBrandDto;
 import com.storage.model.entity.Brand;
+import com.storage.service.mapper.SouvenirMapper;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @RequiredArgsConstructor
-public class IOBrandService implements BrandService<Brand> {
+public class IOBrandService implements BrandService<PostBrandDto> {
 
+    private final SouvenirMapper mapper;
     private final BrandFileStorage brandStorage;
+    private static final String BRAND_PATH = "src/main/resources/data/brand.csv";
 
-    @Override
-    public List<Brand> findAllByLessPrice(double price) {
-        return null;
+    public IOBrandService() {
+        this.brandStorage = new BrandFileStorage();
+        this.mapper = new SouvenirMapper();
     }
 
     @Override
-    public List<Brand> findAllBrandWithSouvenirs() {
-        return null;
+    public PostBrandDto save(
+            PostBrandDto dto) {
+        Brand brand = brandStorage.saveToCsv(
+                mapper.toEntity(dto));
+        return mapper.toDto(brand);
+
     }
 
     @Override
-    public List<Brand> findBrandsByYear(
-            String souvenirName,
-            String year) {
-        return null;
+    public PostBrandDto edit(
+            PostBrandDto dto) {
+        Brand brand = brandStorage.updateCsv(
+                mapper.toEntity(dto));
+        return mapper.toDto(brand);
     }
 
     @Override
-    public List<Brand> findAll() {
-        return null;
+    public void delete(String name) {
+        brandStorage.deleteFromCsv(name);
     }
 
     @Override
-    public List<Brand> findAllByCountry(String country) {
-        return null;
+    public List<PostBrandDto> findAll() {
+        return mapper.toListBrandDto(
+                brandStorage.readFromCsv(BRAND_PATH));
     }
 
     @Override
-    public Brand save(Brand brand) {
-        return null;
-    }
-
-    @Override
-    public Brand edit(Brand brand) {
-        return null;
-    }
-
-    @Override
-    public Brand delete(String name) {
-        return null;
+    public List<PostBrandDto> findAllByCountry(
+            String country) {
+        return brandStorage
+                .readFromCsv(BRAND_PATH)
+                .stream()
+                .filter(brand -> brand
+                        .getCountry()
+                        .equalsIgnoreCase(country))
+                .map(mapper::toDto)
+                .toList();
     }
 }

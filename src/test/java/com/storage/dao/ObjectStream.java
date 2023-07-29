@@ -1,4 +1,4 @@
-package com.storage.dao.io;
+package com.storage.dao;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

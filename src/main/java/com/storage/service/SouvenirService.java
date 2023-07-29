@@ -16,5 +16,5 @@ public interface SouvenirService<T> {
 
     List<T> findAllByCountry(String country);
 
-    T delete(String name);
+    void delete(String name);
 }

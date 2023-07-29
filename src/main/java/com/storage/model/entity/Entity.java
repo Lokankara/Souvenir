@@ -1,4 +1,6 @@
 package com.storage.model.entity;
 
-public abstract class Entity {
+import java.io.Serializable;
+
+public interface Entity extends Serializable {
 }

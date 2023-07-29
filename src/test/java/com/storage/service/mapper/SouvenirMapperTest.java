@@ -12,7 +12,10 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.storage.service.Utils.*;
+import static com.storage.service.Utils.getBrand;
+import static com.storage.service.Utils.getBrandDto;
+import static com.storage.service.Utils.getSouvenir;
+import static com.storage.service.Utils.getSouvenirDto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 

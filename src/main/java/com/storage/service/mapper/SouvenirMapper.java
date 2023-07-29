@@ -1,7 +1,9 @@
 package com.storage.service.mapper;
 
-import com.storage.model.dto.*;
-import com.storage.model.entity.*;
+import com.storage.model.dto.PostBrandDto;
+import com.storage.model.dto.PostSouvenirDto;
+import com.storage.model.entity.Brand;
+import com.storage.model.entity.Souvenir;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -43,6 +45,14 @@ public class SouvenirMapper {
 
     public List<PostSouvenirDto> toListDto(
             List<Souvenir> storage) {
+        return storage
+                .stream()
+                .map(this::toDto)
+                .toList();
+    }
+
+    public List<PostBrandDto> toListBrandDto(
+            List<Brand> storage) {
         return storage
                 .stream()
                 .map(this::toDto)

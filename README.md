@@ -44,3 +44,6 @@ For brands, you must store:
 
 `java -jar ./target/souvenir-1.0-SNAPSHOT.jar`
 
+http://localhost:8080/
+http://localhost:8080/brand
+http://localhost:8080/souvenir
