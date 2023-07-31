@@ -28,7 +28,7 @@ public class IOSouvenirService
     }
 
     @Override
-    public PostSouvenirDto edit(
+    public PostSouvenirDto update(
             final PostSouvenirDto dto) {
         Souvenir souvenir = facade.editSouvenir(
                 mapper.toEntity(dto));

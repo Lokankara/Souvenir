@@ -19,16 +19,12 @@ public class Pagination {
             HttpServletRequest req, String key, List<? extends Dto> dtoList) {
         String pageParam = req.getParameter("page");
         int page = pageParam != null ? Integer.parseInt(pageParam) : 0;
-
         int size = dtoList.size();
-
         int totalPages = (int) Math.ceil((double) size / SIZE);
         page = Math.min(totalPages, Math.max(1, page));
         int offset = Math.abs(Math.min((page - 1) * SIZE, size));
         int toIndex = Math.min(offset + SIZE, size);
-
         Map<String, Object> params = new HashMap<>();
-
         params.put(key, offset <= toIndex
                 ? dtoList.subList(offset, toIndex)
                 : new ArrayList<PostSouvenirDto>());

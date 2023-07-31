@@ -21,6 +21,7 @@ For brands, you must store:
 #### Service
 - Implement the following features:
 - Add, edit, view all brands and all souvenirs.
+- Delete a given brand and its souvenirs.
 - Display information about the souvenirs of a given brand.
 - Display information about souvenirs made in a given country.
 - View information about brands whose prices for souvenirs are less than the specified price.
@@ -28,7 +29,7 @@ For brands, you must store:
   about all the souvenirs it produces.
 - View information about the brands of a given souvenir produced in a given year.
 - For each year, print a list of souvenirs produced in that year.
-- Delete a given brand and its souvenirs.
+
 
 #### P.S. 
   We do not use databases (only files).
@@ -42,7 +43,7 @@ For brands, you must store:
 
 `mvn clean install -X`
 
-`java -jar ./target/souvenir-1.0-SNAPSHOT.jar`
+`java -jar ./target/souvenir-1.0-SNAPSHOT-jar-with-dependencies.jar`
 
 http://localhost:8080/
 http://localhost:8080/brand

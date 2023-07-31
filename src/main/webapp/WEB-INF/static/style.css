@@ -194,7 +194,7 @@ td input[type="text"] {
 .wrapper {
     position: absolute;
     top: 0;
-    left: 20vw;
+    left: 22vw;
     width: 180px;
     height: 30px;
 }
@@ -261,7 +261,7 @@ td input[type="text"] {
     outline: none;
     border: none;
     background: crimson;
-    color: black;
+    color: white;
     text-shadow: 0 0 10px crimson;
     padding: 0 80px 0 20px;
     border-radius: 30px;
@@ -337,7 +337,9 @@ button, i {
 }
 
 select {
+    position: absolute;
     border: none;
+    left: 3vw;
 }
 
 .settings{

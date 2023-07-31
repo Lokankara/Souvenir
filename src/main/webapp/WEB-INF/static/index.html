@@ -8,19 +8,14 @@
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/style.css">
-
-    <style>
-
-    </style>
 </head>
 <body>
 
 <div id="createModal" class="modal">
     <div class="modal-content">
-        <h4 style="display: inline-block; margin-left: 10px;">
-            Add New Souvenir</h4>
+        <h4 style="display: inline-block; margin-left: 10px;">Add New Souvenir</h4>
         <button type="submit" class="btn btn-danger"
-                style="display:inline-block; float: right;
+                style="display:inline-block; float:right;
                 border-radius: 50%; margin: 5px;">
             <em class="fa fa-times close-icon" onclick="closeModal()"></em>
         </button>
@@ -71,8 +66,16 @@
                                         onclick="showColumn([3,4,5])">Brand
                                 </button>
                             </div>
+                            <div class="col-xs-8 col-sm-8 col-md-3 col-lg-3">
+                                <select id="searchOption" class="dropdown-select">
+                                <option value="brand">Brand</option>
+                                    <option value="country">Country</option>
+                                    <option value="price">Price</option>
+                                    <option value="year">Year</option>
+                                </select>
+                            </div>
                             <div class="wrapper">
-                                <input type="text" placeholder="Search..." autofocus required>
+                                <input id="searchInput" type="text" placeholder="Search..." autofocus required>
                                 <button class="fa fa-search search" type="submit"></button>
                             </div>
                         </div>
@@ -152,6 +155,18 @@
 <script>
     let totalPages = ${totalPages};
     let currentPage = ${currentPage};
+
+    const searchOption = document.getElementById("searchOption");
+    document.getElementById("searchInput").addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            const selectedOption = searchOption.options[searchOption.selectedIndex].value;
+            const searchQuery = document.getElementById("searchInput").value;
+            const url = "/?option=" + selectedOption + "&query=" + searchQuery;
+            console.log('searchOption:', selectedOption);
+            console.log('searchQuery:', searchQuery);
+            window.location.href = url;
+        }
+    });
 </script>
 
 <script src="/static/script.js"></script>

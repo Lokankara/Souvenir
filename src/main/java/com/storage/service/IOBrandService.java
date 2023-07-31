@@ -60,4 +60,17 @@ public class IOBrandService implements BrandService<PostBrandDto> {
                 .map(mapper::toDto)
                 .toList();
     }
+
+    @Override
+    public List<PostBrandDto> findAllByName(
+            String name) {
+        return brandStorage
+                .readFromCsv(BRAND_PATH)
+                .stream()
+                .filter(brand -> brand
+                        .getName()
+                        .equalsIgnoreCase(name))
+                .map(mapper::toDto)
+                .toList();
+    }
 }

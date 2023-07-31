@@ -25,10 +25,6 @@ public class PageGenerator {
         return pageGenerator == null ? new PageGenerator() : pageGenerator;
     }
 
-    public String getPage(String filename) {
-        return getPage(filename, Collections.emptyMap());
-    }
-
     public String getPage(String filename, Map<String, Object> data) {
         Writer stream = new StringWriter();
         try {

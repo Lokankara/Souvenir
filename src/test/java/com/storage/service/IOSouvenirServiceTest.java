@@ -23,9 +23,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class IOSouvenirServiceTest {
@@ -64,7 +62,10 @@ class IOSouvenirServiceTest {
             String brandName, String brandCountry, LocalDateTime souvenirIssue, String souvenirName, double souvenirPrice) {
         PostBrandDto brandDto = getBuild(brandName, brandCountry);
         PostSouvenirDto dto = getPostSouvenirDto(souvenirIssue, souvenirName, souvenirPrice, brandDto);
-        Brand brand = Brand.builder().name(brandName).country(brandCountry).build();
+        Brand brand = Brand.builder()
+                           .name(brandName)
+                           .country(brandCountry)
+                           .build();
         Souvenir souvenir = getSouvenir(souvenirIssue, souvenirName, souvenirPrice, brand);
         when(mapper.toEntity(dto)).thenReturn(souvenir);
         when(facade.saveSouvenir(souvenir)).thenThrow(new SouvenirNotFoundException(""));
@@ -79,7 +80,10 @@ class IOSouvenirServiceTest {
             String brandName, String brandCountry, LocalDateTime souvenirIssue, String souvenirName, double souvenirPrice) {
         PostBrandDto brandDto = getBuild(brandName, brandCountry);
         PostSouvenirDto dto = getPostSouvenirDto(souvenirIssue, souvenirName, souvenirPrice, brandDto);
-        Brand brand = Brand.builder().name(brandName).country(brandCountry).build();
+        Brand brand = Brand.builder()
+                           .name(brandName)
+                           .country(brandCountry)
+                           .build();
         Souvenir souvenir = getSouvenir(souvenirIssue, souvenirName, souvenirPrice, brand);
         when(mapper.toEntity(dto)).thenReturn(souvenir);
         when(facade.saveSouvenir(souvenir)).thenThrow(new BrandNotFoundException(""));
@@ -95,7 +99,10 @@ class IOSouvenirServiceTest {
             String brandName, String brandCountry, LocalDateTime souvenirIssue, String souvenirName, double souvenirPrice) {
         PostBrandDto brandDto = getBuild(brandName, brandCountry);
         PostSouvenirDto dto = getPostSouvenirDto(souvenirIssue, souvenirName, souvenirPrice, brandDto);
-        Brand brand = Brand.builder().name(brandName).country(brandCountry).build();
+        Brand brand = Brand.builder()
+                           .name(brandName)
+                           .country(brandCountry)
+                           .build();
         Souvenir souvenir = getSouvenir(souvenirIssue, souvenirName, souvenirPrice, brand);
         when(mapper.toEntity(dto)).thenReturn(souvenir);
         when(facade.saveSouvenir(souvenir)).thenReturn(souvenir);
@@ -115,15 +122,30 @@ class IOSouvenirServiceTest {
             String brandName, String brandCountry, String souvenirIssue, String souvenirName, String souvenirPrice) {
         LocalDateTime issue = LocalDateTime.parse(souvenirIssue);
         double price = Double.parseDouble(souvenirPrice);
-        PostBrandDto brandDto = PostBrandDto.builder().name(brandName).country(brandCountry).build();
-        PostSouvenirDto dto = PostSouvenirDto.builder().brand(brandDto).issue(issue)
-                                             .name(souvenirName).price(price).build();
-        Souvenir souvenir = Souvenir.builder().brand(Brand.builder().name(brandName).country(brandCountry).build())
-                                    .issue(issue).name(souvenirName).price(price).build();
+        PostBrandDto brandDto = PostBrandDto.builder()
+                                            .name(brandName)
+                                            .country(brandCountry)
+                                            .build();
+        PostSouvenirDto dto = PostSouvenirDto.builder()
+                                             .brand(brandDto)
+                                             .issue(issue)
+                                             .name(souvenirName)
+                                             .price(price)
+                                             .build();
+        Souvenir souvenir = Souvenir.builder()
+                                    .brand(Brand
+                                            .builder()
+                                            .name(brandName)
+                                            .country(brandCountry)
+                                            .build())
+                                    .issue(issue)
+                                    .name(souvenirName)
+                                    .price(price)
+                                    .build();
         when(mapper.toEntity(dto)).thenReturn(souvenir);
         when(mapper.toDto(souvenir)).thenReturn(dto);
         when(facade.editSouvenir(souvenir)).thenReturn(souvenir);
-        PostSouvenirDto result = service.edit(dto);
+        PostSouvenirDto result = service.update(dto);
         verify(mapper).toEntity(dto);
         verify(mapper).toDto(souvenir);
         verify(facade).editSouvenir(souvenir);
@@ -135,12 +157,27 @@ class IOSouvenirServiceTest {
     @DisplayName("Given findAll should return all souvenirs as PostSouvenirDto objects")
     void findAllReturnsAllSouvenirsAsDtos(
             String brandName, String brandCountry, LocalDateTime issue, String souvenirName, Double price) {
-        Souvenir souvenir = Souvenir.builder().brand(Brand.builder().name(brandName).country(brandCountry).build())
-                                    .issue(issue).name(souvenirName).price(price).build();
+        Souvenir souvenir = Souvenir.builder()
+                                    .brand(Brand
+                                            .builder()
+                                            .name(brandName)
+                                            .country(brandCountry)
+                                            .build())
+                                    .issue(issue)
+                                    .name(souvenirName)
+                                    .price(price)
+                                    .build();
         List<Souvenir> souvenirs = List.of(souvenir);
-        PostBrandDto brandDto = PostBrandDto.builder().name(brandName).country(brandCountry).build();
-        PostSouvenirDto dto = PostSouvenirDto.builder().brand(brandDto).issue(issue)
-                                             .name(souvenirName).price(price).build();
+        PostBrandDto brandDto = PostBrandDto.builder()
+                                            .name(brandName)
+                                            .country(brandCountry)
+                                            .build();
+        PostSouvenirDto dto = PostSouvenirDto.builder()
+                                             .brand(brandDto)
+                                             .issue(issue)
+                                             .name(souvenirName)
+                                             .price(price)
+                                             .build();
         List<PostSouvenirDto> expectedDtos = List.of(dto);
 
         when(facade.findAllSouvenirs()).thenReturn(souvenirs);
@@ -156,12 +193,27 @@ class IOSouvenirServiceTest {
     @DisplayName("findAllByBrand should return all souvenirs for the given brand name as PostSouvenirDto objects")
     void findAllByBrandReturnsAllSouvenirsForBrandAsDtos(
             String brandName, String brandCountry, LocalDateTime issue, String souvenirName, Double price) {
-        Souvenir souvenir = Souvenir.builder().brand(Brand.builder().name(brandName).country(brandCountry).build())
-                                    .issue(issue).name(souvenirName).price(price).build();
+        Souvenir souvenir = Souvenir.builder()
+                                    .brand(Brand
+                                            .builder()
+                                            .name(brandName)
+                                            .country(brandCountry)
+                                            .build())
+                                    .issue(issue)
+                                    .name(souvenirName)
+                                    .price(price)
+                                    .build();
         List<Souvenir> souvenirs = List.of(souvenir);
-        PostBrandDto brandDto = PostBrandDto.builder().name(brandName).country(brandCountry).build();
-        PostSouvenirDto dto = PostSouvenirDto.builder().brand(brandDto).issue(issue)
-                                             .name(souvenirName).price(price).build();
+        PostBrandDto brandDto = PostBrandDto.builder()
+                                            .name(brandName)
+                                            .country(brandCountry)
+                                            .build();
+        PostSouvenirDto dto = PostSouvenirDto.builder()
+                                             .brand(brandDto)
+                                             .issue(issue)
+                                             .name(souvenirName)
+                                             .price(price)
+                                             .build();
         List<PostSouvenirDto> expectedDtos = List.of(dto);
 
         when(facade.findAllSouvenirsByBrand(brandName)).thenReturn(souvenirs);

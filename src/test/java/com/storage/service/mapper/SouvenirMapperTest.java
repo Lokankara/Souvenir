@@ -21,11 +21,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class SouvenirMapperTest {
     private final BrandConverter brandConverter = new BrandConverter();
-    private SouvenirMapper mapper;
+    private final SouvenirMapper mapper = new SouvenirMapper();
 
     @BeforeEach
     void setUp() {
-        mapper = new SouvenirMapper();
     }
 
     @ParameterizedTest
@@ -51,10 +50,8 @@ class SouvenirMapperTest {
         souvenir.setBrand(brand);
         PostSouvenirDto dto = mapper.toDto(souvenir);
         assertNotNull(dto);
-        assertEquals(brandName, dto.getBrand()
-                                   .getName());
-        assertEquals(country, dto.getBrand()
-                                 .getCountry());
+        assertEquals(brandName, dto.getBrand().getName());
+        assertEquals(country, dto.getBrand().getCountry());
         assertEquals(souvenirName, dto.getName());
         assertEquals(issue, dto.getIssue());
         assertEquals(price, dto.getPrice());

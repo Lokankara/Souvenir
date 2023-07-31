@@ -7,7 +7,6 @@ import com.storage.service.exception.SouvenirIsAlreadyExists;
 import com.storage.service.exception.SouvenirNotFoundException;
 import lombok.RequiredArgsConstructor;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,7 +29,8 @@ public class SouvenirFileStorage implements FileStorage<Souvenir> {
                 writer.write(HEADER_CSV + "\n");
             }
             if (!isDuplicate(souvenir)) {
-                writer.write(getLine(souvenir));
+                writer.write(String.join(",",
+                        getData(souvenir)) + "\n");
                 return souvenir;
             } else {
                 String msg = "Duplicate entry, not saved.";
@@ -82,13 +82,9 @@ public class SouvenirFileStorage implements FileStorage<Souvenir> {
     public void deleteFromCsv(String name) {
         List<Souvenir> souvenirs = readFromCsv(SOUVENIR_PATH);
         souvenirs.removeIf(souvenir -> souvenir
-                .getName().equals(name));
+                .getName()
+                .equals(name));
         writeToCsvFile(souvenirs, SOUVENIR_PATH, FIELDS);
-    }
-
-    private String getLine(Souvenir souvenir) {
-        return String.join(",",
-                getData(souvenir)) + "\n";
     }
 
     @Override
@@ -102,27 +98,7 @@ public class SouvenirFileStorage implements FileStorage<Souvenir> {
     }
 
     private boolean isDuplicate(Souvenir souvenir) {
-        try (BufferedReader reader = new BufferedReader(
-                new FileReader(SOUVENIR_PATH))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] values = line.split(",");
-                if (values[0].equals(souvenir
-                        .getName())
-                        && values[1].equals(souvenir
-                        .getBrand()
-                        .getCountry())
-                        && values[2].equals(souvenir
-                        .getBrand()
-                        .getCountry())) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            String msg = "could not check for duplicates ";
-            LOGGER.warning(msg + SOUVENIR_PATH);
-            throw new SouvenirNotFoundException(msg);
-        }
-        return false;
+        return readFromCsv(SOUVENIR_PATH)
+                .contains(souvenir);
     }
 }

@@ -6,7 +6,7 @@ public interface SouvenirService<T> {
 
     T save(T t);
 
-    T edit(T t);
+    T update(T t);
 
     List<T> findAll();
 

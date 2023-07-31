@@ -4,8 +4,6 @@ import com.storage.dao.BrandFileStorage;
 import com.storage.dao.SouvenirFileStorage;
 import com.storage.model.entity.Brand;
 import com.storage.model.entity.Souvenir;
-import com.storage.service.exception.BrandNotFoundException;
-import com.storage.service.exception.SouvenirNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,8 +17,11 @@ import java.util.List;
 import static com.storage.dao.SouvenirFileStorageTest.SOUVENIR_PATH;
 import static com.storage.service.Utils.getBrand;
 import static com.storage.service.Utils.getSouvenir;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class StorageFacadeTest {
     @Mock
@@ -99,7 +100,7 @@ class StorageFacadeTest {
 //    void findAllSouvenirsByBrandTest(String brandName, String country, LocalDateTime issue,
 //                                     String souvenirName, double price) {
 //        List<Souvenir> souvenirs = List.of(getSouvenir(brandName, country, issue, souvenirName, price));
-//        when(souvenirStorage.readFromCsv(SOUVENIR_PATH)).thenReturn(souvenirs);
+//        when(souvenirStorage.readFromCsv(SOUVENIRPATH)).thenReturn(souvenirs);
 //        List<Souvenir> allSouvenirsByBrand = storageFacade.findAllSouvenirsByBrand(brandName);
 //        System.out.println(souvenirs);
 //        assertEquals(souvenirs.stream()
@@ -115,7 +116,7 @@ class StorageFacadeTest {
 //                                    String souvenirName, double price) {
 //        List<Souvenir> souvenirs = List.of(getSouvenir(brandName, country, issue, souvenirName, price));
 //
-//        when(souvenirStorage.readFromCsv(SOUVENIR_PATH)).thenReturn(souvenirs);
+//        when(souvenirStorage.readFromCsv(SOUVENIRPATH)).thenReturn(souvenirs);
 //        List<Souvenir> allSouvenirsByYear =
 //                storageFacade.findAllSouvenirsByYear(String.valueOf(issue.getYear()));
 //        assertEquals(souvenirs.stream()
@@ -134,7 +135,7 @@ class StorageFacadeTest {
 //                getSouvenir(brandName, country, issue, souvenirName, price)
 //        );
 //
-//        when(souvenirStorage.readFromCsv(SOUVENIR_PATH)).thenReturn(souvenirs);
+//        when(souvenirStorage.readFromCsv(SOUVENIRPATH)).thenReturn(souvenirs);
 //
 //        List<Souvenir> allSouvenirsByCountry =
 //                storageFacade.findAllSouvenirsByCountry(country);
@@ -165,7 +166,7 @@ class StorageFacadeTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/souvenirs.csv", numLinesToSkip = 1)
     @DisplayName("Given a souvenir, when saveSouvenir, then throw SouvenirNotFoundException if souvenir not saved")
-    void saveSouvenirTest_SouvenirNotFoundException(
+    void saveSouvenirTestSouvenirNotFoundException(
             String brandName, String country, LocalDateTime issue,
             String souvenirName, double price) {
         Souvenir souvenir = getSouvenir(brandName, country, issue, souvenirName, price);
@@ -176,7 +177,7 @@ class StorageFacadeTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/souvenirs.csv", numLinesToSkip = 1)
     @DisplayName("Given a souvenir, when saveSouvenir, then throw BrandNotFoundException if brand not saved")
-    void saveSouvenirTest_BrandNotFoundException(
+    void saveSouvenirTestBrandNotFoundException(
             String brandName, String country, LocalDateTime issue,
             String souvenirName, double price) {
         Souvenir souvenir = getSouvenir(brandName, country, issue, souvenirName, price);
@@ -188,7 +189,7 @@ class StorageFacadeTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/souvenirs.csv", numLinesToSkip = 1)
     @DisplayName("Given a souvenir, when editSouvenir, then throw SouvenirNotFoundException if souvenir not updated")
-    void editSouvenirTest_SouvenirNotFoundException(String brandName, String country, LocalDateTime issue,
+    void editSouvenirTestSouvenirNotFoundException(String brandName, String country, LocalDateTime issue,
                                                     String souvenirName, double price) {
         Souvenir souvenir = getSouvenir(brandName, country, issue, souvenirName, price);
         when(souvenirStorage.updateCsv(souvenir)).thenReturn(new Souvenir());
@@ -198,7 +199,7 @@ class StorageFacadeTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/souvenirs.csv", numLinesToSkip = 1)
     @DisplayName("Given a souvenir name, when delete, then throw SouvenirNotFoundException if souvenir not deleted")
-    void deleteTest_SouvenirNotFoundException(String brandName, String country, LocalDateTime issue,
+    void deleteTestSouvenirNotFoundException(String brandName, String country, LocalDateTime issue,
                                               String souvenirName, double price) {
         doNothing().when(souvenirStorage)
                    .deleteFromCsv(souvenirName);

@@ -11,11 +11,13 @@ public class Utils {
     public static Souvenir getSouvenir(
             String name, String country, LocalDateTime issue,
             String souvenirName, double price) {
+        Brand build = Brand
+                .builder()
+                .name(name)
+                .country(country)
+                .build();
         return Souvenir.builder()
-                       .brand(Brand.builder()
-                                   .name(name)
-                                   .country(country)
-                                   .build())
+                       .brand(build)
                        .name(souvenirName)
                        .issue(issue)
                        .price(price)

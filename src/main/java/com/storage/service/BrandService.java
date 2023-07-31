@@ -11,6 +11,7 @@ public interface BrandService<T> {
     List<T> findAll();
 
     List<T> findAllByCountry(String country);
+    List<T> findAllByName(String name);
 
     void delete(String name);
 }

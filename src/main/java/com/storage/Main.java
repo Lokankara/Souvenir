@@ -12,8 +12,12 @@ import java.util.logging.Logger;
 
 public class Main {
     private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
+        start();
+    }
+
+    private static void start() {
         ServletContextHandler contextHandler =
                 new ServletContextHandler(
                         ServletContextHandler.SESSIONS);
