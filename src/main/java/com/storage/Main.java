@@ -1,7 +1,7 @@
 package com.storage;
 
 import com.storage.web.servlet.BrandServlet;
-import com.storage.web.servlet.MainServlet;
+import com.storage.web.servlet.ErrorServlet;
 import com.storage.web.servlet.SouvenirServlet;
 import com.storage.web.servlet.StaticFileServlet;
 import org.eclipse.jetty.server.Server;
@@ -22,11 +22,9 @@ public class Main {
                 new ServletContextHandler(
                         ServletContextHandler.SESSIONS);
 
-        contextHandler.addServlet(new ServletHolder(new MainServlet()), "/");
+        contextHandler.addServlet(new ServletHolder(new SouvenirServlet()), "/");
         contextHandler.addServlet(new ServletHolder(new BrandServlet()), "/brand");
-        contextHandler.addServlet(new ServletHolder(new SouvenirServlet()), "/souvenir");
-
-        contextHandler.setContextPath("/");
+        contextHandler.addServlet(new ServletHolder(new ErrorServlet()), "/error");
         contextHandler.setResourceBase("src/main/webapp");
         contextHandler.addServlet(StaticFileServlet.class, "/static/*");
 

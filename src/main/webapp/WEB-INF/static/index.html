@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Storage</title>
+    <title>Main</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"
           rel="stylesheet" type="text/css">
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
             <em class="fa fa-times close-icon" onclick="closeModal()"></em>
         </button>
 
-        <form action="/souvenir" method="post" class="product-form">
+        <form action="/" method="post" class="product-form">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required
                    class="product-form__input">
@@ -56,19 +56,12 @@
                         <div class="col col-xs-6" style="display: inline-flex;">
 
                             <div class="tab">
-                                <button class="tab-links"
-                                        onclick="showColumn([0,1,2,3,4,5])">All
-                                </button>
-                                <button class="tab-links"
-                                        onclick="showColumn([0,1,2,5])">Souvenir
-                                </button>
-                                <button class="tab-links"
-                                        onclick="showColumn([3,4,5])">Brand
-                                </button>
+                                <a href="/" class="tab-links">Souvenir</a>
+                                <a href="/brand" class="tab-links">Brand</a>
                             </div>
                             <div class="col-xs-8 col-sm-8 col-md-3 col-lg-3">
                                 <select id="searchOption" class="dropdown-select">
-                                <option value="brand">Brand</option>
+                                    <option value="brand">Brand</option>
                                     <option value="country">Country</option>
                                     <option value="price">Price</option>
                                     <option value="year">Year</option>
@@ -105,14 +98,14 @@
                         <#if souvenirs??>
                         <#list souvenirs as souvenir>
                         <tr>
-                            <form action="/souvenir" method="put">
-                                <td><input type="text" id="uname" name="name" value="${souvenir.name}" required></td>
+                            <form onsubmit="updateSouvenir(this); return false;">
+                                <td><input type="text" id="uname" name="name" value="${souvenir.name}" required readonly></td>
                                 <td><input type="text" id="uprice" name="price" value="${souvenir.price}" required></td>
                                 <td><input type="text" id="uissue" name="issue" value="${souvenir.issue}" required></td>
                                 <td><input type="text" id="ubrand" name="brand" value="${souvenir.brand.name}" required></td>
                                 <td><input type="text" id="ucountry" name="country" value="${souvenir.brand.country}" required></td>
                                 <td class="settings">
-                                    <button type="submit" onclick="updateSouvenir()"
+                                    <button type="submit"
                                             class="btn btn-success">
                                         <em class="fa fa-pencil"></em>
                                     </button>
@@ -130,13 +123,13 @@
                             <td colspan="6">No souvenirs found</td>
                         </tr>
                     </#if>
-                        </tbody>
+                    </tbody>
                     </table>
                 </div>
                 <div class="panel-footer">
                     <div class="row">
                         <div class="pagination"
-                             onclick="handlePaginationClick(event)">
+                             onclick="handlePaginationClick(event, '/')">
                             <ul></ul>
                         </div>
                     </div>
@@ -167,6 +160,40 @@
             window.location.href = url;
         }
     });
+
+    function updateSouvenir(form) {
+        let formData = new FormData(form);
+        let name = formData.get('name');
+        let price = formData.get('price');
+        let issue = formData.get('issue');
+        let country = formData.get('country');
+        let brand = formData.get('brand');
+        let url = '/?name=' + name + '&price=' + price + '&issue=' + issue + '&brand=' + brand + '&country=' + country;
+        fetch(url, {
+            method: 'put',
+        })
+            .then(response => {
+                console.log('Ok:', response);
+                window.location.href = url;
+            })
+            .then(text => console.log(text))
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function deleteSouvenir(name) {
+        const host = '/';
+        let url = host + '?name=' + name;
+        fetch(url, {
+            method: 'delete',
+        }).then(response => {
+            console.log('Ok:', response);
+            window.location.href = url;
+        }).catch(err => {
+            console.error(err)
+        })
+    }
 </script>
 
 <script src="/static/script.js"></script>

@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Pasha">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+
+    <title>405</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: "Days One", sans-serif;
+        }
+        body {
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            background-color: #41035e ;
+        }
+        .scene {
+            perspective: 400px;
+        }
+        .box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            transform-style: preserve-3d;
+            transform: translateZ(-100px);
+            transition: 0.3s;
+            animation: rotateAnimation 6s infinite cubic-bezier(.5,0,.5,1);
+        }
+        .box__face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            font-size: 120px;
+            line-height: 200px;
+            text-align: center;
+            color: #fff;
+            border: 1px solid #000;
+        }
+        .box__face.front {
+            transform: rotateY(0deg) translateZ(100px);
+            background: #20162b;
+        }
+        .box__face.back {
+            transform: rotateY(90deg) translateZ(100px);
+            background: #130d1a;
+        }
+        .box__face.right {
+            transform: rotateY(180deg) translateZ(100px);
+            background: #070509;
+        }
+        .box__face.left {
+            transform: rotateY(-90deg) translateZ(100px);
+            background: #000;
+        }
+        .box__face.top {
+            transform: rotateX(90deg) translateZ(100px);
+            background: #130d1a;
+        }
+        .box__face.bottom {
+            transform: rotateX(-90deg) translateZ(100px);
+            background: #000;
+        }
+        @keyframes rotateAnimation {
+            10% {
+                transform: translateZ(-100px) rotateY(-90deg);
+            }
+            30% {
+                transform: translateZ(-100px) rotateY(-180deg);
+            }
+            45% {
+                transform: translateZ(-100px) rotateX(-90deg);
+            }
+            60% {
+                transform: translateZ(-100px) rotateY(90deg);
+            }
+            75% {
+                transform: translateZ(-100px) rotateX(90deg);
+            }
+            97% {
+                transform: translateZ(-100px) rotateX(0deg);
+            }
+        }
+        .shadow {
+            position: absolute;
+            z-index: -1;
+            left: -50px;
+            top: calc(100% - 20px);
+            width: calc(100% + 100px);
+            height: 30px;
+            border-radius: 50%;
+            background: #000;
+            filter: blur(20px);
+        }
+        .desc {
+            margin-top: 60px;
+            text-align: center;
+        }
+        .desc h2 {
+            margin: 0;
+            font-size: 26px;
+        }
+        .desc button {
+            border: 2px solid #130d1a;
+            background: transparent;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-family: "Days One", sans-serif;
+            box-shadow: 4px 4px 0 0px rgba(19, 13, 26, 0.5);
+            position: relative;
+            transition: 0.3s;
+            outline: none;
+            cursor: pointer;
+            border-radius: 0 20px;
+            overflow: hidden;
+        }
+        .desc button:after {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 0;
+            content: "";
+            background: #130d1a;
+            transition: 0.3s;
+            z-index: -1;
+        }
+        .desc button:hover {
+            color: #fff;
+            /*letter-spacing: 2px;*/
+        }
+        .desc button:hover:after {
+            height: 100%;
+        }
+        .desc button:active {
+            box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+<div class="scene">
+    <div class="box">
+        <div class="box__face front">4</div>
+        <div class="box__face back">0</div>
+        <div class="box__face right">5</div>
+        <div class="box__face top">4</div>
+        <div class="box__face left">0</div>
+        <div class="box__face bottom">5</div>
+    </div>
+    <div class="shadow"></div>
+</div>
+<div class="desc">
+    <h2>Oops. Something went wrong!</h2>
+    <form action="/">
+    <button type="submit">BACK TO MAIN PAGE</button>
+    </form>
+</div>
+</body>
+</html>

@@ -13,14 +13,15 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
 public class SouvenirFileStorage implements FileStorage<Souvenir> {
 
     private static final Logger LOGGER = Logger.getLogger(SouvenirFileStorage.class.getName());
     private static final String SOUVENIR_PATH = "src/main/resources/data/souvenir.csv";
-    private static final String HEADER_CSV = "BRAND,COUNTRY,ISSUE,NAME,PRICE";
-    private static final String[] FIELDS = {"brand", "country", "issue", "name", "price"};
+    private static final String HEADER_CSV = "COUNTRY,BRAND,ISSUE,NAME,PRICE";
+    private static final String[] FIELDS = {"country", "brand", "issue", "name", "price"};
 
     @Override
     public Souvenir saveToCsv(Souvenir souvenir) {
@@ -66,14 +67,13 @@ public class SouvenirFileStorage implements FileStorage<Souvenir> {
     @Override
     public Souvenir updateCsv(Souvenir souvenir) {
         List<Souvenir> souvenirs = readFromCsv(SOUVENIR_PATH);
-        for (int i = 0; i < souvenirs.size(); i++) {
-            if (souvenirs.get(i)
+        IntStream.range(0, souvenirs.size())
+                 .filter(i -> souvenirs
+                         .get(i)
                          .getName()
-                         .equals(souvenir.getName())) {
-                souvenirs.set(i, souvenir);
-                return souvenir;
-            }
-        }
+                         .equals(souvenir.getName()))
+                 .findFirst()
+                 .ifPresent(s -> souvenirs.set(s, souvenir));
         writeToCsvFile(souvenirs, SOUVENIR_PATH, FIELDS);
         return souvenir;
     }
@@ -87,11 +87,20 @@ public class SouvenirFileStorage implements FileStorage<Souvenir> {
         writeToCsvFile(souvenirs, SOUVENIR_PATH, FIELDS);
     }
 
+    public void deleteFromCsvByBrand(String brandName) {
+        List<Souvenir> souvenirs = readFromCsv(SOUVENIR_PATH);
+        souvenirs.removeIf(souvenir -> souvenir
+                .getBrand()
+                .getName()
+                .equals(brandName));
+        writeToCsvFile(souvenirs, SOUVENIR_PATH, FIELDS);
+    }
+
     @Override
     public String[] getData(Souvenir souvenir) {
         return new String[]{
-                souvenir.getBrand().getName(),
                 souvenir.getBrand().getCountry(),
+                souvenir.getBrand().getName(),
                 souvenir.getIssue().toString(),
                 souvenir.getName(),
                 souvenir.getPrice().toString()};

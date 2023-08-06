@@ -8,6 +8,6 @@ public class BrandConverter
     @Override
     protected Object convert(String value) {
         String[] values = value.split(",");
-        return new Brand(values[1], values[0]);
+        return new Brand(values[0], values[1]);
     }
 }

@@ -1,50 +1,3 @@
-function updateSouvenir() {
-    let name = document.querySelector('#uname').value;
-    let price = document.querySelector('#uprice').value;
-    let issue = document.querySelector('#uissue').value;
-    let brand = document.querySelector('#ubrand').value;
-    let country = document.querySelector('#ucountry').value;
-
-    let url = '/souvenir' + '?name=' + name + '&price=' + price + '&issue=' + issue + '&brand=' + brand + '&country=' + country;
-
-    fetch(url, {
-        method: 'put',
-    })
-        .then(response => {
-            console.log('Ok:', response);
-            window.location.href = url;
-        })
-        .then(text => console.log(text));
-}
-
-function deleteSouvenir(name) {
-    let url = '/souvenir' + '?name=' + name;
-    fetch(url, {
-        method: 'delete',
-    }).then(response => {
-        console.log('Ok:', response);
-        window.location.href = url;
-    }).catch(err => {
-        console.error(err)
-    })
-}
-
-function showColumn(columnsToShow) {
-    const table = document.querySelector(".table-list");
-    const rows = table.querySelectorAll("tr");
-
-    rows.forEach(row => {
-        const cells = row.querySelectorAll("td, th");
-        cells.forEach((cell, index) => {
-            if (columnsToShow.includes(index)) {
-                cell.style.display = "";
-            } else {
-                cell.style.display = "none";
-            }
-        });
-    });
-}
-
 function showModal() {
     const modal = document.getElementById("createModal");
     modal.style.display = "block";
@@ -55,9 +8,10 @@ function closeModal() {
     modal.style.display = "none";
 }
 
-function goto(page) {
-    console.log(page)
-    window.location.href = '/souvenir?page=' + page;
+function goto(page, host) {
+    let href = host + '?page=' + page;
+    console.log(href)
+    window.location.href = href;
 }
 
 const element = document.querySelector(".pagination ul");
@@ -122,18 +76,18 @@ function createPagination(totalPages, currentPage) {
     return liTag;
 }
 
-
-function handlePaginationClick(event) {
+function handlePaginationClick(event, host) {
     const target = event.target.closest("li");
     if (target) {
         if (target.classList.contains("numb")) {
-            goto(target.dataset.page);
+            goto(target.dataset.page, host);
         } else if (target.classList.contains("prev")) {
-            goto(currentPage - 1);
+            goto(currentPage - 1, host);
         } else if (target.classList.contains("next")) {
-            goto(currentPage + 1);
+            goto(currentPage + 1, host);
         }
     }
 }
 
 createPagination(totalPages, currentPage);
+

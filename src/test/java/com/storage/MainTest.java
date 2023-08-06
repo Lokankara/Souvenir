@@ -1,7 +1,6 @@
 package com.storage;
 
 import com.storage.web.servlet.BrandServlet;
-import com.storage.web.servlet.MainServlet;
 import com.storage.web.servlet.SouvenirServlet;
 import com.storage.web.servlet.StaticFileServlet;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -27,9 +26,8 @@ class MainTest {
     public void setup() throws Exception {
         server = new Server(PORT);
         ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        contextHandler.addServlet(new ServletHolder(new MainServlet()), "/");
         contextHandler.addServlet(new ServletHolder(new BrandServlet()), "/brand");
-        contextHandler.addServlet(new ServletHolder(new SouvenirServlet()), "/souvenir");
+        contextHandler.addServlet(new ServletHolder(new SouvenirServlet()), "/");
         contextHandler.setContextPath("/");
         contextHandler.setResourceBase("src/main/webapp");
         contextHandler.addServlet(StaticFileServlet.class, "/static/*");
@@ -67,7 +65,7 @@ class MainTest {
     @Test
     void testSouvenirServlet() throws Exception {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpGet request = new HttpGet(BASE_URL + "/souvenir");
+            HttpGet request = new HttpGet(BASE_URL + "/");
             CloseableHttpResponse response = client.execute(request);
             assertEquals(200, response.getStatusLine()
                                       .getStatusCode());

@@ -8,12 +8,170 @@
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/style.css">
-
-    <style>
-
-    </style>
 </head>
 <body>
+
+<div id="createModal" class="modal">
+    <div class="modal-content">
+        <h4 style="display: inline-block; margin-left: 10px;">Add New Souvenir</h4>
+        <button type="submit" class="btn btn-danger"
+                style="display:inline-block; float:right;
+                border-radius: 50%; margin: 5px;">
+            <em class="fa fa-times close-icon" onclick="closeModal()"></em>
+        </button>
+
+        <form action="/brand" method="post" class="product-form">
+            <label for="brand">Brand:</label>
+            <input type="text" id="brand" name="brand" required
+                   class="product-form__input">
+            <br>
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" required
+                   class="product-form__input">
+            <br>
+            <input type="submit" value="Create"
+                   class="product-form__btn btn btn-info btn-l">
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default panel-table">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col col-xs-6" style="display: inline-flex;">
+
+                            <div class="tab">
+                                <a href="/" class="tab-links">Souvenir</a>
+                                <a href="/brand" class="tab-links">Brand</a>
+                            </div>
+                            <div class="col-xs-8 col-sm-8 col-md-3 col-lg-3">
+                                <select id="searchOption" class="dropdown-select">
+                                    <option value="brand">Brand</option>
+                                    <option value="country">Country</option>
+                                </select>
+                            </div>
+                            <div class="wrapper">
+                                <input id="searchInput" type="text" placeholder="Search..." autofocus required>
+                                <button class="fa fa-search search" type="submit"></button>
+                            </div>
+                        </div>
+                        <div class="col col-xs-6 text-right">
+                            <a href="#" onclick="showModal()">
+                                <button type="button"
+                                        class="btn btn-l btn-primary btn-create">
+                                    Create New
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered table-list">
+                        <thead>
+                        <tr>
+                            <th>Brand</th>
+                            <th>Country</th>
+                            <th><em class="fa fa-cog"></em></th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        <#if brands??>
+                        <#list brands as brand>
+                        <tr>
+                            <form onsubmit="updateBrand(this); return false;">
+                                <td><input type="text" id="ubrand" name="brand" value="${brand.name}" required></td>
+                                <td><input type="text" id="ucountry" name="country" value="${brand.country}" required></td>
+
+                                <td class="settings">
+                                    <button type="submit"
+                                            class="btn btn-success">
+                                        <em class="fa fa-pencil"></em>
+                                    </button>
+                            </form>
+                            <form id="deleteForm" onclick="deleteBrand(`${brand.name}`)">
+                                <button class="btn btn-danger">
+                                    <em class="fa fa-trash"></em>
+                                </button>
+                            </form>
+                            </td>
+                        </tr>
+                        </#list>
+                        <#else>
+                        <tr>
+                            <td colspan="6">No brands found</td>
+                        </tr>
+                    </#if>
+                    </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="pagination"
+                             onclick="handlePaginationClick(event, '/brand')">
+                            <ul></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<#assign totalPages = totalPages>
+<#assign currentPage = currentPage>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    let totalPages = ${totalPages};
+    let currentPage = ${currentPage};
+
+    function updateBrand(form) {
+        let formData = new FormData(form);
+        let country = formData.get('country');
+        let brand = formData.get('brand');
+        let url = '/brand' + '?brand=' + brand + '&country=' + country;
+        fetch(url, {
+            method: 'put',
+        })
+            .then(response => {
+                console.log('Ok:', response);
+                window.location.href = url;
+            })
+            .then(text => console.log(text))
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function deleteBrand(name) {
+        let url = '/brand' + '?name=' + name;
+        fetch(url, {
+            method: 'delete',
+        }).then(response => {
+            console.log('Ok:', response);
+            window.location.href = url;
+        }).catch(err => {
+            console.error(err)
+        })
+    }
+
+    const searchOption = document.getElementById("searchOption");
+    document.getElementById("searchInput").addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            const selectedOption = searchOption.options[searchOption.selectedIndex].value;
+            const searchQuery = document.getElementById("searchInput").value;
+            const url = "/brand?option=" + selectedOption + "&query=" + searchQuery;
+            console.log('searchOption:', selectedOption);
+            console.log('searchQuery:', searchQuery);
+            window.location.href = url;
+        }
+    });
+</script>
 
 <script src="/static/script.js"></script>
 </body>

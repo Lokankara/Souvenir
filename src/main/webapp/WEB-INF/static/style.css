@@ -44,6 +44,7 @@ body {
 .panel-table .panel-body .table-bordered > tbody > tr > td:last-of-type {
     text-align: center;
     border-right: 0;
+    width: 100px;
 }
 
 .panel-table .panel-body .table-bordered > thead > tr > th:first-of-type,
@@ -343,5 +344,5 @@ select {
 }
 
 .settings{
-    display: inline-flex;
+    display: flex;
 }

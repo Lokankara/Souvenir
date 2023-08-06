@@ -2,7 +2,7 @@
 
 # Store
 
-### Souvenirs
+## Souvenirs
 
 The file storage (a set of files of any structure) contains
 information about souvenirs and their brands.
@@ -39,12 +39,11 @@ For brands, you must store:
   the souvenir "Branded Cup" may be available from the brands "National University of
   Shipbuilding and Privatbank.
 
-`mvn sonar:sonar`
-
 `mvn clean install -X`
 
 `java -jar ./target/souvenir-1.0-SNAPSHOT-jar-with-dependencies.jar`
 
 http://localhost:8080/
 http://localhost:8080/brand
-http://localhost:8080/souvenir
+http://localhost:8080/error
+http://localhost:8080/static

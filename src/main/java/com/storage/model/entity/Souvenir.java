@@ -18,11 +18,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class Souvenir implements Entity {
-
     @Serial
     private static final long serialVersionUID = 7829136421241571165L;
-
-    //    @CsvBindAndSplitByName(elementType = Brand.class, splitOn = "\\|", writeDelimiter = "|", collectionType = Set.class)
     @CsvRecurse
     private Brand brand;
     @CsvDate(value = "yyyy-MM-dd'T'HH:mm")

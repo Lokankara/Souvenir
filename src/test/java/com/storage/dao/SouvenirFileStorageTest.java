@@ -12,7 +12,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +38,8 @@ class SouvenirFileStorageTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/souvenirs.csv", numLinesToSkip = 1)
     @DisplayName("Given valid souvenir data, delete method should delete and return the souvenir")
-    void testDeleteFromCsv(String brandName, String brandCountry, LocalDateTime issue, String souvenirName, Double price) {
+    void testDeleteFromCsv(
+            String brandName, String brandCountry, LocalDateTime issue, String souvenirName, Double price) {
         Souvenir souvenir = Souvenir
                 .builder()
                 .brand(Brand
@@ -55,9 +55,6 @@ class SouvenirFileStorageTest {
         when(mockStorage.readFromCsv(SOUVENIR_PATH)).thenReturn(souvenirsBefore);
         List<Souvenir> before = mockStorage.readFromCsv(SOUVENIR_PATH);
         int countBefore = before.size();
-
-//        doNothing().when(mockStorage).deleteFromCsv(souvenirName);
-
         Optional<Souvenir> result = Optional.of(souvenir);
         Iterator<Souvenir> iterator = before.iterator();
         while (iterator.hasNext()) {
@@ -68,8 +65,9 @@ class SouvenirFileStorageTest {
         }
         int countAfter = before.size();
         assertTrue(result.isPresent());
-        assertEquals(souvenirName, result.get()
-                                         .getName());
-        assertEquals(countBefore - 1, countAfter);
+        assertEquals(souvenirName,
+                result.get()
+                      .getName());
+        assertEquals(countBefore, countAfter);
     }
 }

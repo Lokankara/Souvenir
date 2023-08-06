@@ -45,19 +45,19 @@ public interface FileStorage<T> {
         return writeHeader;
     }
 
-    default void writeToCsvFile(List<T> t, String path, String[] fields) {
+    default void writeToCsvFile(
+            List<T> list, String path, String[] fields) {
         try (ICSVWriter csvWriter = new CSVWriterBuilder(
                 new FileWriter(path))
                 .withQuoteChar(NO_QUOTE_CHARACTER)
                 .build()) {
             csvWriter.writeNext(fields);
-            t.stream()
-                     .map(this::getData)
-                     .forEach(csvWriter::writeNext);
-            LOGGER.info("CSV was file updated");
+            list.stream()
+                .map(this::getData)
+                .forEach(csvWriter::writeNext);
+            LOGGER.info("CSV was file updated " + path);
         } catch (IOException e) {
-            LOGGER.warning("Cannot updating the CSV file: {}"
-                    + path);
+            LOGGER.warning("Cannot updating the CSV file: " + path);
         }
     }
 }

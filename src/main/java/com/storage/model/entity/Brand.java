@@ -16,8 +16,8 @@ import lombok.NonNull;
 public class Brand implements Entity {
     @NonNull
     @CsvBindByPosition(position = 0)
-    private String name;
+    private String country;
     @NonNull
     @CsvBindByPosition(position = 1)
-    private String country;
+    private String name;
 }

@@ -50,4 +50,58 @@ public class Utils {
                            .country(country)
                            .build();
     }
+
+    public static Souvenir getSouvenir(
+            LocalDateTime souvenirIssue,
+            String souvenirName,
+            double souvenirPrice,
+            Brand brand) {
+        return Souvenir.builder()
+                       .brand(brand)
+                       .name(souvenirName)
+                       .issue(souvenirIssue)
+                       .price(souvenirPrice)
+                       .build();
+    }
+
+    public static PostSouvenirDto getPostSouvenirDto(
+            LocalDateTime souvenirIssue,
+            String souvenirName,
+            double souvenirPrice,
+            PostBrandDto brandDto) {
+        return PostSouvenirDto.builder()
+                              .brand(brandDto)
+                              .name(souvenirName)
+                              .issue(souvenirIssue)
+                              .price(souvenirPrice)
+                              .build();
+    }
+
+    public static PostBrandDto getBuild(
+            String brandName,
+            String brandCountry) {
+        return getBrandDto(brandName, brandCountry);
+    }
+
+    public static PostSouvenirDto getPostSouvenirDto(
+            String souvenirName, LocalDateTime issue,
+            double price, PostBrandDto brandDto) {
+        return PostSouvenirDto.builder()
+                              .brand(brandDto)
+                              .issue(issue)
+                              .name(souvenirName)
+                              .price(price)
+                              .build();
+    }
+
+    public static Souvenir getSouvenir(
+            String brandName, String brandCountry, LocalDateTime issue,
+            String souvenirName, Double price) {
+        return Souvenir.builder()
+                       .brand(getBrand(brandName, brandCountry))
+                       .issue(issue)
+                       .name(souvenirName)
+                       .price(price)
+                       .build();
+    }
 }

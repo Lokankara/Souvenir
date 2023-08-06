@@ -2,21 +2,39 @@ package com.storage.service.facade;
 
 import com.storage.dao.BrandFileStorage;
 import com.storage.dao.SouvenirFileStorage;
+import com.storage.model.entity.Brand;
 import com.storage.model.entity.Souvenir;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class StorageFacade {
     private final BrandFileStorage brandStorage;
     private final SouvenirFileStorage souvenirStorage;
     private static final String SOUVENIR_PATH = "src/main/resources/data/souvenir.csv";
+    private static final String BRAND_PATH = "src/main/resources/data/brand.csv";
 
     public StorageFacade() {
         this.brandStorage = new BrandFileStorage();
         this.souvenirStorage = new SouvenirFileStorage();
+    }
+
+    public List<Brand> findAllBrands() {
+        return brandStorage.readFromCsv(BRAND_PATH);
+    }
+
+    public void deleteBrand(String name) {
+        souvenirStorage.deleteFromCsvByBrand(name);
+        brandStorage.deleteFromCsv(name);
+    }
+
+    public Brand updateBrand(Brand brand) {
+        return brandStorage.updateCsv(brand);
+    }
+
+    public Brand saveBrand(Brand brand) {
+        return brandStorage.saveToCsv(brand);
     }
 
     public Souvenir saveSouvenir(
@@ -26,12 +44,12 @@ public class StorageFacade {
         return souvenirStorage.saveToCsv(souvenir);
     }
 
-    public Souvenir editSouvenir(
+    public Souvenir updateSouvenir(
             final Souvenir souvenir) {
         return souvenirStorage.updateCsv(souvenir);
     }
 
-    public void delete(
+    public void deleteSouvenir(
             final String name) {
         souvenirStorage.deleteFromCsv(name);
     }
@@ -49,7 +67,7 @@ public class StorageFacade {
                         .getBrand()
                         .getName()
                         .equalsIgnoreCase(name))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<Souvenir> findAllSouvenirsByYear(

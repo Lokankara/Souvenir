@@ -2,6 +2,7 @@ package com.storage.service;
 
 import com.storage.model.dto.PostSouvenirDto;
 import com.storage.model.entity.Souvenir;
+import com.storage.service.exception.DataInputException;
 import com.storage.service.facade.StorageFacade;
 import com.storage.service.mapper.SouvenirMapper;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class IOSouvenirService
     @Override
     public PostSouvenirDto update(
             final PostSouvenirDto dto) {
-        Souvenir souvenir = facade.editSouvenir(
+        Souvenir souvenir = facade.updateSouvenir(
                 mapper.toEntity(dto));
         return mapper.toDto(souvenir);
     }
@@ -64,6 +65,15 @@ public class IOSouvenirService
 
     @Override
     public void delete(final String name) {
-        facade.delete(name);
+        facade.deleteSouvenir(name);
+    }
+
+    public List<PostSouvenirDto> findAllByPrice(String query) {
+        try {
+            double price = Double.parseDouble(query);
+            return mapper.toListDto(facade.getBrandsByLessPrice(price));
+        } catch (Exception e) {
+            throw new DataInputException("price invalid");
+        }
     }
 }
