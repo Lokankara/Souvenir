@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mb-10">
+      <h1>{{ countryInfo?.officialName }}</h1>
+      <div class="year-switcher mb-4">
+        <button *ngFor="let year of years"
+                (click)="setYear(year)"
+                [class.active]="year === selectedYear">
+          {{ year }}
+        </button>
+      </div>
+      <div *ngIf="holidays.length > 0">
+        <span class="country-flag" [class]="'fi fi-' + holidays[0].countryCode.toLowerCase()"></span>
+        <table class="holiday-table">
+          <thead>
+          <tr>
+            <th>Holiday Name</th>
+            <th>Local Name</th>
+            <th>Date</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let holiday of holidays">
+            <td>{{ holiday.name }}</td>
+            <td>{{ holiday.localName }}</td>
+            <td>{{ formatDateWeek(holiday.date) }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="holidays.length === 0">
+        <p>No upcoming holidays for the selected year.</p>
+      </div>
+    </div>
+  </div>
+</div>

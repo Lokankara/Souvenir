@@ -1,0 +1,13 @@
+<div class='random'>
+  <div class='card-title' *ngFor='let country of randomCountries'>
+    <button class="flag left" (click)='navigateToCountry(country.countryCode)'>
+      <span [class]="'fi fi-' + country.countryCode.toLowerCase()"></span>
+    </button>
+    <h3 class='d-inline-block fw-bolder'>{{ country.name }}</h3>
+    <p class='card-text'>
+      <strong class='text-black fw-bolder'>Next Holiday:</strong> {{ country.nextHoliday }} <br>
+      <strong class='text-black fw-bolder'
+              *ngIf='country.holidayDate'>Date:</strong> {{ country.holidayDate || '' }}
+    </p>
+  </div>
+</div>

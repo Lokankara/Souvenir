@@ -1,0 +1,17 @@
+<div class="container" *ngIf="isVisible">
+  <div class="input">
+    <input type="text" id="name" [(ngModel)]="searchTerm" (ngModelChange)="search()" required/>
+    <label for="name">Search countries</label>
+  </div>
+</div>
+
+<div class="countries-container">
+  <ul id="countries">
+    <li *ngFor="let country of countries">
+      <button class="flag" (click)="navigateToCountry(country.countryCode)">
+        <span [class]="'fi fi-' + country.countryCode.toLowerCase()"></span>
+      </button>
+      <div class="unit">{{ country.name }}</div>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,11 @@
+h1 {
+  font-size: 3rem;
+  font-weight: 500;
+  align-self: center;
+  left: 10vw;
+  display: flex;
+  position: absolute;
+  list-style-type: none;
+  align-items: center;
+  top: 2vh;
+}
